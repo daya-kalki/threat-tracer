@@ -1,0 +1,825 @@
+Delivered-To: daya.avadi@gmail.com
+Received: by 2002:a05:612c:4e0d:20b0:4b7:9d5f:3e69 with SMTP id mt13-n2csp353316vqb;
+        Fri, 7 Feb 2025 20:33:20 -0800 (PST)
+X-Received: by 2002:a2e:bc93:0:b0:300:17a3:7af9 with SMTP id 38308e7fff4ca-307e5d93fc8mr19853141fa.19.1738989200124;
+        Fri, 07 Feb 2025 20:33:20 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1738989200; cv=none;
+        d=google.com; s=arc-20240605;
+        b=TKTZKruLcsYgGxHPdGISlY9iWoKEfL4Fb8j7b2JuuYyAUgbSuwR1vmLvhiBRNpD2dY
+         Ge7bjMNqYNGZAHtn0hOqgrj+uYusodxduqnicsSr3+Bkm0rIHJlbVj7T8AywMw7c7RWz
+         pCDFh/Td36bB18ium24XT0azDSODk1LRSgWSyGyadPmPtFaa9q7a79XkIGZaVJt4h1nO
+         s3J1hgtWUrmFNkvQzPE7mWGbxZI3FH8ty/rEWUzCGR3QWx/RIYljC79v44yE3K3fa3OJ
+         46yeT3LNaWHNMu5NkyV+O0iLf6Uz6B8t2DIn0uLttAwMfTqi5Q++AbHoG0eW/1obbRI4
+         9skw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :dkim-signature;
+        bh=KR1AEX9/MzJK8TP0CnZs2DMZYGuDr+dNnlGuoSVcUts=;
+        fh=4CGjwj1tIP+ZXUy6TQP4py+TpmTYS4Udr23eN9PUT8s=;
+        b=cPmLNAh9zFB8kB7OjEmqmrxy4FoFjnU8yy09AshywCt0tmRyR2uMWopaGb5nJX93ZX
+         Mi5nNqFWWL6xz4SCN+dqLgt+QVtj9b1MoES8ig1ttijdkBE5FSOB1I3hGY/gpwZLAWAR
+         /JUA7wRlfWkqfRg0/7VNr0vO0jIMtOo3TOlp7cs4mzUg58tokyJn34Ed++B24EL8Q1s6
+         7JRcKseHKFh0wwtfS4bl8xHNToA5E2tGpFlHdqeSwj7HEVKrUznv3BBtHCSOqZTpkQ6B
+         UFEl+aWDzrjtQCgKLiT/VlSeKzQkJOKox0AmYlwDIhAh5dyks/wMY56HsXfrXF8RFt+w
+         nXMQ==;
+        dara=google.com
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@gmail.com header.s=20230601 header.b=fMmFyktK;
+       spf=pass (google.com: domain of keeru1224@gmail.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=keeru1224@gmail.com;
+       dmarc=pass (p=NONE sp=QUARANTINE dis=NONE) header.from=gmail.com;
+       dara=pass header.i=@gmail.com
+Return-Path: <keeru1224@gmail.com>
+Received: from mail-sor-f41.google.com (mail-sor-f41.google.com. [209.85.220.41])
+        by mx.google.com with SMTPS id 38308e7fff4ca-307dee38f38sor8170941fa.5.2025.02.07.20.33.19
+        for <daya.avadi@gmail.com>
+        (Google Transport Security);
+        Fri, 07 Feb 2025 20:33:20 -0800 (PST)
+Received-SPF: pass (google.com: domain of keeru1224@gmail.com designates 209.85.220.41 as permitted sender) client-ip=209.85.220.41;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@gmail.com header.s=20230601 header.b=fMmFyktK;
+       spf=pass (google.com: domain of keeru1224@gmail.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=keeru1224@gmail.com;
+       dmarc=pass (p=NONE sp=QUARANTINE dis=NONE) header.from=gmail.com;
+       dara=pass header.i=@gmail.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20230601; t=1738989198; x=1739593998; dara=google.com;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :from:to:cc:subject:date:message-id:reply-to;
+        bh=KR1AEX9/MzJK8TP0CnZs2DMZYGuDr+dNnlGuoSVcUts=;
+        b=fMmFyktK4vrWhSo+Pc3e8+E4wTPzqnWkjkwK/X7ir7gqnQVOVvlEv3E+lHH5xrFvGN
+         n8o2Hap+65P0ExltI2tqrwJ/9GHJjc9g2+039QxOGDJP/8CZiaCuYnAbpPUnlOR6QkX3
+         IBJmbx2aF9d4Shks4SBcEU07KmcHpcQouNPS/3Y5ZPQixlqfCVq5vaFQROtXf0M0Bc1T
+         IxjLiCUvOL3BY0jHxZu0jw2NXAbBhZXbWcuQTj4kh3eK4MOm8MI7nITGlDPQxjLSsD4V
+         hXHNJ2XNtMxQa6u3yfjkJCkIxz/4iN+5GVltHdHkkKLSKCxBcFDbc9ahFYz1QPOVWqLE
+         fL3A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20230601; t=1738989198; x=1739593998;
+        h=to:subject:message-id:date:from:in-reply-to:references:mime-version
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+        bh=KR1AEX9/MzJK8TP0CnZs2DMZYGuDr+dNnlGuoSVcUts=;
+        b=Ro9MkKe8hFcPPGq9QKKLvNGPlBxQPGczle9VD8LkeKqwN+StUltHCirw+tcHruR4B+
+         rOcUaYOEsFXXZNB8tv3GYviYWTZdwnkrQTOr7BLe7GH/qOMr9Nc/XLWmLJCjwbgg5Npk
+         9GGsmOUO3qTNulgJ8N8t/OQOsNdH3qhDyM6T4pTekRPpcBL3Y8oys1WaE3kvyie7d1xY
+         9yUkddijdW1zgrKXwLHYE4R28N24bN9+FAtVzraM4TEFLaAgrKYKaKwdOPKQiWO5TNpn
+         AChSK2tBqh/0YC2W5JYRYjiazQxq8zFoGrFHboJ5Ui84D8j6IExLosobXcRO6VHG4w02
+         kDNw==
+X-Gm-Message-State: AOJu0YxB5A7EnJIGM37dVid2VwI+5ec9SRQK8HlzyadzUknibxyspt4K
+	BkUXDWXulS3MQWITq2lbtBmOywJsW/wW6YdQf55JYU23VDIOKXeRIyS9oW49gb9X7b9Tj+dVEgj
+	dKlKWdQeQozZOr71ccX+S0TX6pMSsLA==
+X-Gm-Gg: ASbGnctwQowHfV5UPlKVwC9KsDSTDCx3Vzg2dbHfl5eNKvj1HHNWdRkdsKfST0E8y9f
+	WlqDgwyaw28D11naTBlkZAkbOBkR4y0i7O/alNY4z6ija147VDixVDABZSgxOW2JfLBr+/1IWpA
+	==
+X-Google-Smtp-Source: AGHT+IG4qibDOGynKNQAR2fi1mJf+gbJ3+FsYoMM6eaT4I/Au7le7QcNfxD7ao5mDIA/4CbQalG2Li6N4JDXTU+xKTY=
+X-Received: by 2002:a2e:9e42:0:b0:307:d779:79ee with SMTP id
+ 38308e7fff4ca-307da58e220mr33554441fa.12.1738989197468; Fri, 07 Feb 2025
+ 20:33:17 -0800 (PST)
+MIME-Version: 1.0
+References: <PIRnFAXQTtyZk67V2yNqVQ@geopod-ismtpd-1>
+In-Reply-To: <PIRnFAXQTtyZk67V2yNqVQ@geopod-ismtpd-1>
+From: Keerthana S <keeru1224@gmail.com>
+Date: Sat, 8 Feb 2025 10:03:04 +0530
+X-Gm-Features: AWEUYZkgnlcDld6MYroJGHFW0x_PTDpQLODAYj4da05lZ9F2LUdKjF_enjHB9gg
+Message-ID: <CAN0EnwF4aehXceKszxyRROD+Xr46qpNnf13PqkadX-08GcP6+Q@mail.gmail.com>
+Subject: Fwd: Reminder: NPTEL: Exam Registration is open now for Jan 2025 courses!
+To: Dayanand <daya.avadi@gmail.com>
+Content-Type: multipart/alternative; boundary="000000000000622ccb062d99f944"
+
+--000000000000622ccb062d99f944
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+---------- Forwarded message ---------
+From: <onlinecourses@nptel.iitm.ac.in>
+Date: Wed, 29 Jan, 2025, 5:20 pm
+Subject: Reminder: NPTEL: Exam Registration is open now for Jan 2025
+courses!
+To: <noc24-ee56-announce@nptel.iitm.ac.in>
+
+
+Dear Candidate,
+
+Here is a golden opportunity for those who had previously enrolled in this
+course during the Jan 2024/July 2024 semester, but could not participate in
+the exams or were absent/did not pass the exam for this course. This course
+is being reoffered in Jan 2025 and we are giving you another chance to
+write the exam on April 27, 2025 and obtain a certificate based on NPTEL
+norms. Do not let go of this unique opportunity to earn a certificate from
+the IITs/IISc.
+
+IMPORTANT instructions for learners - Please read this carefully
+
+1. The exam date for this course: April 27, 2025
+
+2. CLICK HERE
+<https://u3447072.ct.sendgrid.net/ls/click?upn=3Du001.KVe6xeK12Gy7P9NKD6c-2=
+FfHe51tX5-2F9DCvwntyEH8YeAtWZli3jZg4bjXTZbpqegkQdp1bRHCmCTAs9Sgj2F6P2GTBVOY=
+FBb8GYEkkwuFKxM-3DUePh_X1v5djjgedNKoB5UzQ5EnuTJx37-2F8RTKEKDFb6hYLL8uiYlhmf=
+Ac1ejYW76jO8Igbe5tBAialzzM9YINMA9vB-2BBxjl57u8L4se1j0JCKh380QrAC4JAv0aPCxPB=
+6UkFdMw2bLBQscP-2FGsxElpymB4-2FpdsuYRoWYf-2BCpIC-2BHwPg9FR3Vhk3NMIczwkv0CYx=
+su-2BDaLiHFHZKISXVSBgyTYZdfo2b2Hjs8mUhzHoLQfj-2Fo-3D>
+to register for the exam.
+
+Please fill the exam form using the same Enrolled email ID & make fee
+payment via the form, as before.
+
+3. Choose from the Cities where exam will be conducted: Exam Cities
+<https://u3447072.ct.sendgrid.net/ls/click?upn=3Du001.KVe6xeK12Gy7P9NKD6c-2=
+FfFnKbHR5Is-2F55gv-2FxyB4Q4LVe5HGpnRTINFgtfjML8jRoLgcLSgOPKTZGSbgOlQ4joxqzO=
+nAuWh-2BnTu1VE9Ypwu9REeRrIjsg9F6Qrwpmx8p6gktE8E98WcbrmCnIYemF2jCmoRk2zBi7yj=
+C5fKwm7Lggx7pI1oOZpJWLW6j2MzfRwti_X1v5djjgedNKoB5UzQ5EnuTJx37-2F8RTKEKDFb6h=
+YLL8uiYlhmfAc1ejYW76jO8Igbe5tBAialzzM9YINMA9vBwtfEyb3-2FBOxI2quyL7kR5esJz-2=
+FFPnpTTkuA36fX5bNcMTVbZPyTr04et5T3FJ4LwUS8N0P4ClVMdSdDPJ-2B41K9jdMb3MCpQCX4=
+J6m53a-2Fijmeh1bOK75RTJThtmsLEQo47GQgY9SKBu69ILqrdOkrQ-3D>
+
+4. You DO NOT have to re-enroll in the courses.
+
+5. You DO NOT have to resubmit Assignments OR participate in the
+non-proctored programming exams(if applicable) in the previous semester
+
+6. If you do enroll in the Jan 2025 course, we will take the best average
+assignment scores/non-proctored programming exam(if applicable) score
+across the two semesters.
+
+NOTE:
+
+   1.
+
+   Please check once if you have >=3D 40/100  in average assignment score a=
+nd
+   also participated and satisfied the criteria in the non-proctored
+   programming exams(if applicable) that were conducted in Jan 2024/July 20=
+24
+   to become eligible for the e-certificate, wherever applicable.
+   2.
+
+   If not, please submit assignments again in the Jan 2025 course and also
+   participate in the non-proctored programming exams(if applicable) to bec=
+ome
+   eligible for the e-certificate.
+   3.
+
+   We will not be having new assignments or unproctored exams(if
+   applicable) in the previous semester's (Jan 2024/July 2024) course.
+
+RECOMMENDATION: If you want to take new assignments and an unproctored
+exam(if applicable) or brush up on your lessons for the exam, please enroll
+in the Jan 2025 course.
+
+Click here
+<https://u3447072.ct.sendgrid.net/ls/click?upn=3Du001.KVe6xeK12Gy7P9NKD6c-2=
+FfFnKbHR5Is-2F55gv-2FxyB4Q4LVe5HGpnRTINFgtfjML8jR7FSqnGSLD1OvkWCoxtPhe27Noj=
+2MLmsq0xEd-2B1lOg-2BX3dNEasTYy-2BBFrjMtbQnAXQksGJGVoOVEhiCVprxit6I0mDtGobFT=
+QqvsSVlvoWh3QAB09DJ1IunrKkVnrAvFjhPFo5QBZnVo0v2gprFl9ZIM-2BKCZR6yv6n9SlgMtY=
+msQ-3DyeUE_X1v5djjgedNKoB5UzQ5EnuTJx37-2F8RTKEKDFb6hYLL8uiYlhmfAc1ejYW76jO8=
+Igbe5tBAialzzM9YINMA9vB1qCMck1YlQt2f8Pw0243Q1uguep3jafJZ2O9CBihF-2FTZRjC11d=
+XD7Wp7lD8nn8uM4R6X3Kl2JKw9ORHLiVLQBia407GTlEAjop9ylOV2AVCzDSwMLTCQ6VBYOg0aV=
+h4sip5G8tq-2BzNhMh7qF4ifR-2BI-3D>
+to enroll in the current course, links are provided corresponding to the
+course name.
+
+
+7. Exam fees:
+
+If you register for the exam and pay before Feb 24, 2025 - 5:00 PM, Exam
+fees will be Rs. 1000/- per exam.
+
+8. 50% fee waiver for the following categories:
+
+Students belonging to the SC/ST category: please select Yes for the SC/ST
+option and upload the correct Community certificate.
+
+Students belonging to the PwD category with more than 40% disability:
+please select Yes for the option and upload the relevant Disability
+certificate.
+
+9. Last date for exam registration: Feb 28, 2025 - 5:00 PM (Friday).
+
+10. Between Feb 24, 2025 - 5:00 PM & Feb 28, 2025 - 5:00 PM late fee will
+be applicable.
+
+11. Mode of payment: Online payment - debit card/credit card/net
+banking/UPI.
+
+12.  HALL TICKET:
+
+The hall ticket will be available for download tentatively by 2 weeks prior
+to the exam date. We will confirm the same through an announcement once it
+is published.
+
+13. FOR CANDIDATES WHO WOULD LIKE TO WRITE MORE THAN 1 COURSE EXAM:- you
+can add or delete courses and pay separately =E2=80=93 till the date when t=
+he exam
+form closes. Same day of exam =E2=80=93 you can write exams for 2 courses i=
+n the 2
+sessions. Same exam center will be allocated for both the sessions.
+
+14. Data changes:
+
+Last date for data changes: Feb 28, 2025 - 5:00 PM:
+
+We will charge an additional fee of Rs. 200 to make any changes related to
+name, DOB, photo, signature, SC/ST and PWD certificates after the last date
+of data changes.
+
+The following 6 fields can be changed (until the form closes) ONLY when
+there are NO courses in the course cart. And you will be able to edit those
+fields only if you: -
+
+REMOVE unpaid courses from the cart And/or - CANCEL paid courses
+
+1. Do you come under the SC/ST category? *
+
+2. SC/ST Proof
+
+3. Are you a person with disabilities? *
+
+4. Are you a person with disabilities above 40%?
+
+5. Disabilities Proof
+
+6. What is your role?
+
+Note: Once you remove or cancel a course, you will be able to edit these
+fields immediately.
+
+But, for cancelled courses, refund of fees will be initiated only after 2
+weeks.
+
+15. LAST DATE FOR CANCELLING EXAMS and getting a refund: Feb 28, 2025 -
+5:00 PM
+
+16. Click here to view Timeline and Guideline : Guideline
+<https://u3447072.ct.sendgrid.net/ls/click?upn=3Du001.KVe6xeK12Gy7P9NKD6c-2=
+FfFnKbHR5Is-2F55gv-2FxyB4Q4IuTbqUjuqlcDbL9CfgNWlS4mEox6Gx3hVIbYPJ7kUewjH12H=
+vTtI6e94OmWPam1ztY6jolIHWsEOFXrlGKVVK40ipHCF84b95Mb6mL7-2FVT-2BSQupkkhQVEHO=
+vY1VZitGMLGRRibEmFIzqMFk4nhPy0iCTpF_X1v5djjgedNKoB5UzQ5EnuTJx37-2F8RTKEKDFb=
+6hYLL8uiYlhmfAc1ejYW76jO8Igbe5tBAialzzM9YINMA9vBwoFHd4okX6cZaLDx19DLKJZw-2B=
+0Ev1HQCM8J5v3kAkMybTBO-2Fid8NHVW4EWjoBVymw6y9zJXfsMA-2FdY1EKkM10Cq1Qxn65Z-2=
+FCLlJTDL8MeOfPIIoF4VsQdLzslIaDJX5fHjHwEWCNd792003zaC2y-2FE-3D>
+
+Domain Certification
+
+Domain Certification helps learners to gain expertise in a specific
+Area/Domain. This can be helpful for learners who wish to work in a
+particular area as part of their job or research or for those appearing for
+some competitive exam or becoming job ready or specialising in an area of
+study.
+
+
+
+Every domain will comprise Core courses and Elective courses. Once a
+learner completes the requisite courses per the mentioned criteria, you
+will receive a Domain Certificate showcasing your scores and the domain of
+expertise. Kindly refer to the following link for the list of courses
+available under each domain: https://nptel.ac.in/domains
+<https://u3447072.ct.sendgrid.net/ls/click?upn=3Du001.KVe6xeK12Gy7P9NKD6c-2=
+FfANRFZaEssB51a-2BQnXhWX1qaO8Pcc8-2FK8y6XfVbXGe2vn9h9_X1v5djjgedNKoB5UzQ5En=
+uTJx37-2F8RTKEKDFb6hYLL8uiYlhmfAc1ejYW76jO8Igbe5tBAialzzM9YINMA9vB5T0cFVA4s=
+tHMfC0AzAlNbUzjKdDeOsaJxRpuACc5toIm6QxTU8OR-2F9P2BmftludK9DXYCtyJJJEy5kytRz=
+jWoUdsgzdaUi7PQnf-2Bbm3WO0M1gUT0aNJUA7sEg7GhKzZKHiM-2BAELGTwDfGHKCCmlMZc-3D=
+>
+
+Outside India Candidates
+
+Candidates who are residing outside India may also fill the exam form and
+pay the fees. Mode of exam and other details will be communicated to you
+separately.
+
+Thanks & Regards,
+
+NPTEL TEAM
+
+--=20
+You received this message because you are subscribed to the Google Groups
+"Announcement list for Industrial Automation And Control" group.
+To unsubscribe from this group and stop receiving emails from it, send an
+email to noc24-ee56-announce+unsubscribe@nptel.iitm.ac.in.
+To view this discussion visit
+https://groups.google.com/a/nptel.iitm.ac.in/d/msgid/noc24-ee56-announce/PI=
+RnFAXQTtyZk67V2yNqVQ%40geopod-ismtpd-1
+<https://groups.google.com/a/nptel.iitm.ac.in/d/msgid/noc24-ee56-announce/P=
+IRnFAXQTtyZk67V2yNqVQ%40geopod-ismtpd-1?utm_medium=3Demail&utm_source=3Dfoo=
+ter>
+.
+For more options, visit
+https://groups.google.com/a/nptel.iitm.ac.in/d/optout.
+
+--000000000000622ccb062d99f944
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"auto"></div><br><div class=3D"gmail_quote gmail_quote_container=
+"><div dir=3D"ltr" class=3D"gmail_attr">---------- Forwarded message ------=
+---<br>From: <span dir=3D"auto">&lt;<a href=3D"mailto:onlinecourses@nptel.i=
+itm.ac.in">onlinecourses@nptel.iitm.ac.in</a>&gt;</span><br>Date: Wed, 29 J=
+an, 2025, 5:20 pm<br>Subject: Reminder: NPTEL: Exam Registration is open no=
+w for Jan 2025 courses!<br>To:  &lt;<a href=3D"mailto:noc24-ee56-announce@n=
+ptel.iitm.ac.in">noc24-ee56-announce@nptel.iitm.ac.in</a>&gt;<br></div><br>=
+<br><span id=3D"m_-2308485663574229917docs-internal-guid-642a96b0-7fff-d66c=
+-4266-d148ce8eb9e6"><p dir=3D"ltr" style=3D"line-height:1.9871999999999999;=
+text-align:justify;background-color:#f9f9f9;margin-top:0pt;margin-bottom:0p=
+t"><span style=3D"font-size:10pt;font-family:Arial,sans-serif;color:rgb(34,=
+34,34);background-color:rgb(255,255,255);font-variant-numeric:normal;font-v=
+ariant-east-asian:normal;font-variant-alternates:normal;vertical-align:base=
+line">Dear Candidate,</span></p><p dir=3D"ltr" style=3D"line-height:1.98719=
+99999999999;text-align:justify;background-color:#f9f9f9;margin-top:0pt;marg=
+in-bottom:0pt"><span style=3D"font-size:10pt;font-family:Arial,sans-serif;c=
+olor:rgb(34,34,34);background-color:rgb(255,255,255);font-variant-numeric:n=
+ormal;font-variant-east-asian:normal;font-variant-alternates:normal;vertica=
+l-align:baseline">Here is a golden opportunity for those who had previously=
+ enrolled in this course during the</span><span style=3D"font-size:10pt;fon=
+t-family:Arial,sans-serif;color:rgb(34,34,34);background-color:rgb(255,255,=
+255);font-weight:700;font-variant-numeric:normal;font-variant-east-asian:no=
+rmal;font-variant-alternates:normal;vertical-align:baseline"> Jan 2024/July=
+ 2024</span><span style=3D"font-size:10pt;font-family:Arial,sans-serif;colo=
+r:rgb(34,34,34);background-color:rgb(255,255,255);font-variant-numeric:norm=
+al;font-variant-east-asian:normal;font-variant-alternates:normal;vertical-a=
+lign:baseline"> semester, but could not participate in the exams or were ab=
+sent/did not pass the exam for this course. This course is being reoffered =
+in Jan 2025 and we are giving you another chance to write the exam on </spa=
+n><span style=3D"font-size:10pt;font-family:Arial,sans-serif;color:rgb(34,3=
+4,34);background-color:rgb(255,255,255);font-weight:700;font-variant-numeri=
+c:normal;font-variant-east-asian:normal;font-variant-alternates:normal;vert=
+ical-align:baseline">April 27, 2025</span><span style=3D"font-size:10pt;fon=
+t-family:Arial,sans-serif;color:rgb(34,34,34);background-color:rgb(255,255,=
+255);font-variant-numeric:normal;font-variant-east-asian:normal;font-varian=
+t-alternates:normal;vertical-align:baseline"> and obtain a certificate base=
+d on NPTEL norms. Do not let go of this unique opportunity to earn a certif=
+icate from the IITs/IISc.</span></p><p dir=3D"ltr" style=3D"line-height:1.9=
+871999999999999;text-align:justify;background-color:#f9f9f9;margin-top:0pt;=
+margin-bottom:0pt"><span style=3D"font-size:10pt;font-family:Arial,sans-ser=
+if;background-color:rgb(255,255,255);font-weight:700;font-variant-numeric:n=
+ormal;font-variant-east-asian:normal;font-variant-alternates:normal;text-de=
+coration-line:underline;vertical-align:baseline">IMPORTANT instructions for=
+ learners - Please read this carefully</span><span style=3D"font-size:10pt;=
+font-family:Arial,sans-serif;background-color:rgb(255,255,255);font-variant=
+-numeric:normal;font-variant-east-asian:normal;font-variant-alternates:norm=
+al;text-decoration-line:underline;vertical-align:baseline">=C2=A0</span></p=
+><p dir=3D"ltr" style=3D"line-height:1.9871999999999999;text-align:justify;=
+background-color:#f9f9f9;margin-top:0pt;margin-bottom:0pt"><span style=3D"f=
+ont-size:10pt;font-family:Arial,sans-serif;background-color:rgb(255,255,255=
+);font-variant-numeric:normal;font-variant-east-asian:normal;font-variant-a=
+lternates:normal;vertical-align:baseline">1. The exam date for this course:=
+ </span><span style=3D"font-size:10pt;font-family:Arial,sans-serif;backgrou=
+nd-color:rgb(255,255,0);font-weight:700;font-variant-numeric:normal;font-va=
+riant-east-asian:normal;font-variant-alternates:normal;vertical-align:basel=
+ine">April 27, 2025</span></p><p dir=3D"ltr" style=3D"line-height:1.9871999=
+999999999;text-align:justify;background-color:#f9f9f9;margin-top:0pt;margin=
+-bottom:0pt"><span style=3D"font-size:10pt;font-family:Arial,sans-serif;bac=
+kground-color:rgb(255,255,255);font-variant-numeric:normal;font-variant-eas=
+t-asian:normal;font-variant-alternates:normal;vertical-align:baseline">2.</=
+span><a href=3D"https://u3447072.ct.sendgrid.net/ls/click?upn=3Du001.KVe6xe=
+K12Gy7P9NKD6c-2FfHe51tX5-2F9DCvwntyEH8YeAtWZli3jZg4bjXTZbpqegkQdp1bRHCmCTAs=
+9Sgj2F6P2GTBVOYFBb8GYEkkwuFKxM-3DUePh_X1v5djjgedNKoB5UzQ5EnuTJx37-2F8RTKEKD=
+Fb6hYLL8uiYlhmfAc1ejYW76jO8Igbe5tBAialzzM9YINMA9vB-2BBxjl57u8L4se1j0JCKh380=
+QrAC4JAv0aPCxPB6UkFdMw2bLBQscP-2FGsxElpymB4-2FpdsuYRoWYf-2BCpIC-2BHwPg9FR3V=
+hk3NMIczwkv0CYxsu-2BDaLiHFHZKISXVSBgyTYZdfo2b2Hjs8mUhzHoLQfj-2Fo-3D" style=
+=3D"text-decoration-line:none" title=3D"" target=3D"_blank" rel=3D"noreferr=
+er"><span style=3D"font-size:10pt;font-family:Arial,sans-serif;color:rgb(17=
+,85,204);background-color:rgb(255,255,255);font-variant-numeric:normal;font=
+-variant-east-asian:normal;font-variant-alternates:normal;vertical-align:ba=
+seline"> </span><span style=3D"font-size:11pt;font-family:Arial,sans-serif;=
+color:rgb(17,85,204);background-color:rgb(255,255,255);font-weight:700;font=
+-variant-numeric:normal;font-variant-east-asian:normal;font-variant-alterna=
+tes:normal;vertical-align:baseline">CLICK HERE</span></a><span style=3D"fon=
+t-size:11pt;font-family:Arial,sans-serif;color:rgb(34,34,34);background-col=
+or:rgb(255,255,255);font-variant-numeric:normal;font-variant-east-asian:nor=
+mal;font-variant-alternates:normal;vertical-align:baseline"> to register fo=
+r the exam.</span></p><p dir=3D"ltr" style=3D"line-height:1.987199999999999=
+9;text-align:justify;background-color:#f9f9f9;margin-top:0pt;margin-bottom:=
+0pt"><span style=3D"font-size:10pt;font-family:Arial,sans-serif;background-=
+color:rgb(255,255,255);font-variant-numeric:normal;font-variant-east-asian:=
+normal;font-variant-alternates:normal;vertical-align:baseline">Please fill =
+the exam form using the </span><span style=3D"font-size:10pt;font-family:Ar=
+ial,sans-serif;background-color:rgb(255,255,255);font-weight:700;font-varia=
+nt-numeric:normal;font-variant-east-asian:normal;font-variant-alternates:no=
+rmal;text-decoration-line:underline;vertical-align:baseline">same Enrolled =
+email ID</span><span style=3D"font-size:10pt;font-family:Arial,sans-serif;b=
+ackground-color:rgb(255,255,255);font-variant-numeric:normal;font-variant-e=
+ast-asian:normal;font-variant-alternates:normal;vertical-align:baseline"> &=
+amp; make fee payment via the form, as before.</span></p><p dir=3D"ltr" sty=
+le=3D"line-height:1.9871999999999999;text-align:justify;background-color:#f=
+9f9f9;margin-top:0pt;margin-bottom:0pt"><span style=3D"font-size:10pt;font-=
+family:Arial,sans-serif;background-color:rgb(255,255,255);font-variant-nume=
+ric:normal;font-variant-east-asian:normal;font-variant-alternates:normal;ve=
+rtical-align:baseline">3. </span><span style=3D"font-size:11pt;font-family:=
+Arial,sans-serif;color:rgb(34,34,34);background-color:rgb(255,255,255);font=
+-variant-numeric:normal;font-variant-east-asian:normal;font-variant-alterna=
+tes:normal;vertical-align:baseline">Choose from the Cities where exam will =
+be conducted: </span><a href=3D"https://u3447072.ct.sendgrid.net/ls/click?u=
+pn=3Du001.KVe6xeK12Gy7P9NKD6c-2FfFnKbHR5Is-2F55gv-2FxyB4Q4LVe5HGpnRTINFgtfj=
+ML8jRoLgcLSgOPKTZGSbgOlQ4joxqzOnAuWh-2BnTu1VE9Ypwu9REeRrIjsg9F6Qrwpmx8p6gkt=
+E8E98WcbrmCnIYemF2jCmoRk2zBi7yjC5fKwm7Lggx7pI1oOZpJWLW6j2MzfRwti_X1v5djjged=
+NKoB5UzQ5EnuTJx37-2F8RTKEKDFb6hYLL8uiYlhmfAc1ejYW76jO8Igbe5tBAialzzM9YINMA9=
+vBwtfEyb3-2FBOxI2quyL7kR5esJz-2FFPnpTTkuA36fX5bNcMTVbZPyTr04et5T3FJ4LwUS8N0=
+P4ClVMdSdDPJ-2B41K9jdMb3MCpQCX4J6m53a-2Fijmeh1bOK75RTJThtmsLEQo47GQgY9SKBu6=
+9ILqrdOkrQ-3D" style=3D"text-decoration-line:none" title=3D"" target=3D"_bl=
+ank" rel=3D"noreferrer"><span style=3D"font-size:11pt;font-family:Arial,san=
+s-serif;color:rgb(17,85,204);background-color:rgb(255,255,255);font-weight:=
+700;font-variant-numeric:normal;font-variant-east-asian:normal;font-variant=
+-alternates:normal;vertical-align:baseline">Exam Cities</span></a></p><p di=
+r=3D"ltr" style=3D"line-height:1.9871999999999999;text-align:justify;backgr=
+ound-color:#f9f9f9;margin-top:0pt;margin-bottom:0pt"><span style=3D"font-si=
+ze:10pt;font-family:Arial,sans-serif;background-color:rgb(255,255,255);font=
+-variant-numeric:normal;font-variant-east-asian:normal;font-variant-alterna=
+tes:normal;vertical-align:baseline">4. You DO NOT have to re-enroll in the =
+courses.=C2=A0</span></p><p dir=3D"ltr" style=3D"line-height:1.987199999999=
+9999;text-align:justify;background-color:#f9f9f9;margin-top:0pt;margin-bott=
+om:0pt"><span style=3D"font-size:10pt;font-family:Arial,sans-serif;backgrou=
+nd-color:rgb(255,255,255);font-variant-numeric:normal;font-variant-east-asi=
+an:normal;font-variant-alternates:normal;vertical-align:baseline">5. You DO=
+ NOT have to resubmit Assignments OR participate in the non-proctored progr=
+amming exams(if applicable) in the previous semester</span></p><p dir=3D"lt=
+r" style=3D"line-height:1.9871999999999999;text-align:justify;background-co=
+lor:#f9f9f9;margin-top:0pt;margin-bottom:0pt"><span style=3D"font-size:10pt=
+;font-family:Arial,sans-serif;background-color:rgb(255,255,255);font-varian=
+t-numeric:normal;font-variant-east-asian:normal;font-variant-alternates:nor=
+mal;vertical-align:baseline">6. If you do enroll in the Jan 2025 course, we=
+ will take the best average assignment scores/non-proctored programming exa=
+m(if applicable) score across the two semesters.</span></p><p dir=3D"ltr" s=
+tyle=3D"line-height:1.9871999999999999;text-align:justify;background-color:=
+#f9f9f9;margin-top:0pt;margin-bottom:0pt"><span style=3D"font-size:10pt;fon=
+t-family:Arial,sans-serif;color:rgb(0,0,255);background-color:rgb(255,255,2=
+55);font-weight:700;font-variant-numeric:normal;font-variant-east-asian:nor=
+mal;font-variant-alternates:normal;text-decoration-line:underline;vertical-=
+align:baseline">NOTE:</span></p><ol style=3D"margin-top:0;margin-bottom:0">=
+<li dir=3D"ltr" style=3D"list-style-type:decimal;font-size:10pt;font-family=
+:Arial,sans-serif;color:rgb(0,0,255);background-color:transparent;font-vari=
+ant-numeric:normal;font-variant-east-asian:normal;font-variant-alternates:n=
+ormal;vertical-align:baseline;white-space:pre-wrap;margin-left:23pt" aria-l=
+evel=3D"1"><p dir=3D"ltr" style=3D"line-height:1.9871999999999999;margin-ri=
+ght:8pt;background-color:#f9f9f9;margin-top:0pt;margin-bottom:0pt" role=3D"=
+presentation"><span style=3D"font-size:10pt;background-color:rgb(255,255,25=
+5);font-variant-numeric:normal;font-variant-east-asian:normal;font-variant-=
+alternates:normal;vertical-align:baseline">Please check once if you have &g=
+t;=3D 40/100=C2=A0 in average assignment score and also participated and sa=
+tisfied the criteria in the non-proctored programming exams(if applicable) =
+that were conducted in Jan 2024/July 2024 to become eligible for the e-cert=
+ificate, wherever applicable.</span></p></li><li dir=3D"ltr" style=3D"list-=
+style-type:decimal;font-size:10pt;font-family:Arial,sans-serif;color:rgb(0,=
+0,255);background-color:transparent;font-variant-numeric:normal;font-varian=
+t-east-asian:normal;font-variant-alternates:normal;vertical-align:baseline;=
+white-space:pre-wrap;margin-left:23pt" aria-level=3D"1"><p dir=3D"ltr" styl=
+e=3D"line-height:1.9871999999999999;margin-right:8pt;background-color:#f9f9=
+f9;margin-top:0pt;margin-bottom:0pt" role=3D"presentation"><span style=3D"f=
+ont-size:10pt;background-color:rgb(255,255,255);font-variant-numeric:normal=
+;font-variant-east-asian:normal;font-variant-alternates:normal;vertical-ali=
+gn:baseline">If not, please submit assignments again in the Jan 2025 course=
+ and also participate in the non-proctored programming exams(if applicable)=
+ to become eligible for the e-certificate.</span></p></li><li dir=3D"ltr" s=
+tyle=3D"list-style-type:decimal;font-size:10pt;font-family:Arial,sans-serif=
+;color:rgb(0,0,255);background-color:transparent;font-variant-numeric:norma=
+l;font-variant-east-asian:normal;font-variant-alternates:normal;vertical-al=
+ign:baseline;white-space:pre-wrap;margin-left:23pt" aria-level=3D"1"><p dir=
+=3D"ltr" style=3D"line-height:1.9871999999999999;margin-right:8pt;backgroun=
+d-color:#f9f9f9;margin-top:0pt;margin-bottom:0pt" role=3D"presentation"><sp=
+an style=3D"font-size:10pt;background-color:rgb(255,255,255);font-variant-n=
+umeric:normal;font-variant-east-asian:normal;font-variant-alternates:normal=
+;vertical-align:baseline">We will not be having new assignments or unprocto=
+red exams(if applicable) in the previous semester&#39;s (Jan 2024/July 2024=
+) course.=C2=A0</span></p></li></ol><p dir=3D"ltr" style=3D"line-height:1.9=
+871999999999999;text-align:justify;background-color:#f9f9f9;margin-top:0pt;=
+margin-bottom:0pt"><span style=3D"font-size:10pt;font-family:Arial,sans-ser=
+if;color:rgb(0,0,255);background-color:rgb(255,255,255);font-weight:700;fon=
+t-variant-numeric:normal;font-variant-east-asian:normal;font-variant-altern=
+ates:normal;vertical-align:baseline">RECOMMENDATION:</span><span style=3D"f=
+ont-size:10pt;font-family:Arial,sans-serif;color:rgb(0,0,255);background-co=
+lor:rgb(255,255,255);font-variant-numeric:normal;font-variant-east-asian:no=
+rmal;font-variant-alternates:normal;vertical-align:baseline"> If you want t=
+o take new assignments and an unproctored exam(if applicable) or brush up o=
+n your lessons for the exam, please enroll in the Jan 2025 course.</span></=
+p><p dir=3D"ltr" style=3D"line-height:1.9871999999999999;text-align:justify=
+;background-color:#f9f9f9;margin-top:0pt;margin-bottom:0pt"><a href=3D"http=
+s://u3447072.ct.sendgrid.net/ls/click?upn=3Du001.KVe6xeK12Gy7P9NKD6c-2FfFnK=
+bHR5Is-2F55gv-2FxyB4Q4LVe5HGpnRTINFgtfjML8jR7FSqnGSLD1OvkWCoxtPhe27Noj2MLms=
+q0xEd-2B1lOg-2BX3dNEasTYy-2BBFrjMtbQnAXQksGJGVoOVEhiCVprxit6I0mDtGobFTQqvsS=
+VlvoWh3QAB09DJ1IunrKkVnrAvFjhPFo5QBZnVo0v2gprFl9ZIM-2BKCZR6yv6n9SlgMtYmsQ-3=
+DyeUE_X1v5djjgedNKoB5UzQ5EnuTJx37-2F8RTKEKDFb6hYLL8uiYlhmfAc1ejYW76jO8Igbe5=
+tBAialzzM9YINMA9vB1qCMck1YlQt2f8Pw0243Q1uguep3jafJZ2O9CBihF-2FTZRjC11dXD7Wp=
+7lD8nn8uM4R6X3Kl2JKw9ORHLiVLQBia407GTlEAjop9ylOV2AVCzDSwMLTCQ6VBYOg0aVh4sip=
+5G8tq-2BzNhMh7qF4ifR-2BI-3D" style=3D"text-decoration-line:none" target=3D"=
+_blank" rel=3D"noreferrer"><span style=3D"font-size:10pt;font-family:Arial,=
+sans-serif;color:rgb(17,85,204);background-color:rgb(255,255,0);font-weight=
+:700;font-variant-numeric:normal;font-variant-east-asian:normal;font-varian=
+t-alternates:normal;vertical-align:baseline">Click here</span></a><span sty=
+le=3D"font-size:10pt;font-family:Arial,sans-serif;color:rgb(34,34,34);backg=
+round-color:rgb(255,255,0);font-weight:700;font-variant-numeric:normal;font=
+-variant-east-asian:normal;font-variant-alternates:normal;vertical-align:ba=
+seline"> to enroll in the current course, links are provided corresponding =
+to the course name.</span></p><p dir=3D"ltr" style=3D"line-height:1.9871999=
+999999999;text-align:justify;background-color:#f9f9f9;margin-top:0pt;margin=
+-bottom:0pt"><br></p><p dir=3D"ltr" style=3D"line-height:1.9871999999999999=
+;text-align:justify;background-color:#f9f9f9;margin-top:0pt;margin-bottom:0=
+pt"><span style=3D"font-size:10.5pt;font-family:Arial,sans-serif;background=
+-color:rgb(255,255,255);font-variant-numeric:normal;font-variant-east-asian=
+:normal;font-variant-alternates:normal;vertical-align:baseline">7. Exam fee=
+s:=C2=A0</span></p><p dir=3D"ltr" style=3D"line-height:1.9871999999999999;t=
+ext-align:justify;background-color:#f9f9f9;margin-top:0pt;margin-bottom:0pt=
+"><span style=3D"font-size:11pt;font-family:Arial,sans-serif;color:rgb(34,3=
+4,34);background-color:rgb(255,255,255);font-variant-numeric:normal;font-va=
+riant-east-asian:normal;font-variant-alternates:normal;vertical-align:basel=
+ine">If you register for the exam and pay before </span><span style=3D"font=
+-size:11pt;font-family:Arial,sans-serif;color:rgb(34,34,34);background-colo=
+r:rgb(255,255,255);font-weight:700;font-variant-numeric:normal;font-variant=
+-east-asian:normal;font-variant-alternates:normal;vertical-align:baseline">=
+Feb 24, 2025 - 5:00 PM, </span><span style=3D"font-size:11pt;font-family:Ar=
+ial,sans-serif;color:rgb(34,34,34);background-color:rgb(255,255,255);font-v=
+ariant-numeric:normal;font-variant-east-asian:normal;font-variant-alternate=
+s:normal;vertical-align:baseline">Exam fees will be </span><span style=3D"f=
+ont-size:11pt;font-family:Arial,sans-serif;color:rgb(34,34,34);background-c=
+olor:rgb(255,255,255);font-weight:700;font-variant-numeric:normal;font-vari=
+ant-east-asian:normal;font-variant-alternates:normal;vertical-align:baselin=
+e">Rs. 1000/- per exam</span><span style=3D"font-size:11pt;font-family:Aria=
+l,sans-serif;color:rgb(34,34,34);background-color:rgb(255,255,255);font-var=
+iant-numeric:normal;font-variant-east-asian:normal;font-variant-alternates:=
+normal;vertical-align:baseline">.</span></p><p dir=3D"ltr" style=3D"line-he=
+ight:1.9871999999999999;text-align:justify;background-color:#f9f9f9;margin-=
+top:0pt;margin-bottom:0pt"><span style=3D"font-size:10.5pt;font-family:Aria=
+l,sans-serif;background-color:rgb(255,255,255);font-variant-numeric:normal;=
+font-variant-east-asian:normal;font-variant-alternates:normal;vertical-alig=
+n:baseline">8. 50% fee waiver for the following categories:=C2=A0</span></p=
+><p dir=3D"ltr" style=3D"line-height:1.9871999999999999;text-align:justify;=
+background-color:#f9f9f9;margin-top:0pt;margin-bottom:0pt"><span style=3D"f=
+ont-size:10.5pt;font-family:Arial,sans-serif;background-color:rgb(255,255,2=
+55);font-variant-numeric:normal;font-variant-east-asian:normal;font-variant=
+-alternates:normal;vertical-align:baseline">Students belonging to the SC/ST=
+ category: please select Yes for the SC/ST option and upload the correct Co=
+mmunity certificate.</span></p><p dir=3D"ltr" style=3D"line-height:1.987199=
+9999999999;text-align:justify;background-color:#f9f9f9;margin-top:0pt;margi=
+n-bottom:0pt"><span style=3D"font-size:10.5pt;font-family:Arial,sans-serif;=
+background-color:rgb(255,255,255);font-variant-numeric:normal;font-variant-=
+east-asian:normal;font-variant-alternates:normal;vertical-align:baseline">S=
+tudents belonging to the PwD category with more than 40% disability: please=
+ select Yes for the option and upload the relevant Disability certificate.=
+=C2=A0</span></p><p dir=3D"ltr" style=3D"line-height:1.9871999999999999;tex=
+t-align:justify;background-color:#f9f9f9;margin-top:0pt;margin-bottom:0pt">=
+<span style=3D"font-size:10.5pt;font-family:Arial,sans-serif;background-col=
+or:rgb(255,255,255);font-variant-numeric:normal;font-variant-east-asian:nor=
+mal;font-variant-alternates:normal;vertical-align:baseline">9. </span><span=
+ style=3D"font-size:10.5pt;font-family:Arial,sans-serif;background-color:rg=
+b(255,255,0);font-weight:700;font-variant-numeric:normal;font-variant-east-=
+asian:normal;font-variant-alternates:normal;vertical-align:baseline">Last d=
+ate for exam registration: Feb 28, 2025 - 5:00 PM (Friday).=C2=A0</span></p=
+><p dir=3D"ltr" style=3D"line-height:1.9871999999999999;text-align:justify;=
+background-color:#f9f9f9;margin-top:0pt;margin-bottom:0pt"><span style=3D"f=
+ont-size:10.5pt;font-family:Arial,sans-serif;background-color:rgb(255,255,2=
+55);font-weight:700;font-variant-numeric:normal;font-variant-east-asian:nor=
+mal;font-variant-alternates:normal;vertical-align:baseline">10. Between Feb=
+ 24, 2025 - 5:00 PM &amp; Feb 28, 2025 - 5:00 PM late fee will be applicabl=
+e.</span></p><p dir=3D"ltr" style=3D"line-height:1.9871999999999999;text-al=
+ign:justify;background-color:#f9f9f9;margin-top:0pt;margin-bottom:0pt"><spa=
+n style=3D"font-size:10.5pt;font-family:Arial,sans-serif;background-color:r=
+gb(255,255,255);font-variant-numeric:normal;font-variant-east-asian:normal;=
+font-variant-alternates:normal;vertical-align:baseline">11. Mode of payment=
+: Online payment - debit card/credit card/net banking/UPI.=C2=A0</span></p>=
+<p dir=3D"ltr" style=3D"line-height:1.9871999999999999;text-align:justify;b=
+ackground-color:#f9f9f9;margin-top:0pt;margin-bottom:0pt"><span style=3D"fo=
+nt-size:10.5pt;font-family:Arial,sans-serif;background-color:rgb(255,255,25=
+5);font-variant-numeric:normal;font-variant-east-asian:normal;font-variant-=
+alternates:normal;vertical-align:baseline">12.=C2=A0 </span><span style=3D"=
+font-size:10.5pt;font-family:Arial,sans-serif;background-color:rgb(255,255,=
+255);font-weight:700;font-variant-numeric:normal;font-variant-east-asian:no=
+rmal;font-variant-alternates:normal;vertical-align:baseline">HALL TICKET:=
+=C2=A0</span></p><p dir=3D"ltr" style=3D"line-height:1.9871999999999999;tex=
+t-align:justify;background-color:#f9f9f9;margin-top:0pt;margin-bottom:0pt">=
+<span style=3D"font-size:11pt;font-family:Arial,sans-serif;color:rgb(34,34,=
+34);background-color:rgb(255,255,255);font-variant-numeric:normal;font-vari=
+ant-east-asian:normal;font-variant-alternates:normal;vertical-align:baselin=
+e">The hall ticket will be available for download tentatively by </span><sp=
+an style=3D"font-size:11pt;font-family:Arial,sans-serif;color:rgb(34,34,34)=
+;background-color:rgb(255,255,0);font-weight:700;font-variant-numeric:norma=
+l;font-variant-east-asian:normal;font-variant-alternates:normal;vertical-al=
+ign:baseline">2 weeks prior to the exam date.</span><span style=3D"font-siz=
+e:11pt;font-family:Arial,sans-serif;color:rgb(34,34,34);background-color:rg=
+b(255,255,255);font-variant-numeric:normal;font-variant-east-asian:normal;f=
+ont-variant-alternates:normal;vertical-align:baseline"> We will confirm the=
+ same through an announcement once it is published.=C2=A0</span></p><p dir=
+=3D"ltr" style=3D"line-height:1.9871999999999999;text-align:justify;backgro=
+und-color:#f9f9f9;margin-top:0pt;margin-bottom:0pt"><span style=3D"font-siz=
+e:10.5pt;font-family:Arial,sans-serif;background-color:rgb(255,255,255);fon=
+t-variant-numeric:normal;font-variant-east-asian:normal;font-variant-altern=
+ates:normal;vertical-align:baseline">13. FOR CANDIDATES WHO WOULD LIKE TO W=
+RITE MORE THAN 1 COURSE EXAM:- you can add or delete courses and pay separa=
+tely =E2=80=93 till the date when the exam form closes. Same day of exam =
+=E2=80=93 you can write exams for 2 courses in the 2 sessions. Same exam ce=
+nter will be allocated for both the sessions.=C2=A0</span></p><p dir=3D"ltr=
+" style=3D"line-height:1.9871999999999999;text-align:justify;background-col=
+or:#f9f9f9;margin-top:0pt;margin-bottom:0pt"><span style=3D"font-size:11pt;=
+font-family:Arial,sans-serif;color:rgb(34,34,34);background-color:rgb(255,2=
+55,255);font-variant-numeric:normal;font-variant-east-asian:normal;font-var=
+iant-alternates:normal;vertical-align:baseline">14. </span><span style=3D"f=
+ont-size:11pt;font-family:Arial,sans-serif;color:rgb(255,0,0);background-co=
+lor:rgb(255,255,255);font-weight:700;font-variant-numeric:normal;font-varia=
+nt-east-asian:normal;font-variant-alternates:normal;vertical-align:baseline=
+">Data changes:=C2=A0</span></p><p dir=3D"ltr" style=3D"line-height:1.98719=
+99999999999;text-align:justify;background-color:#f9f9f9;margin-top:0pt;marg=
+in-bottom:0pt"><span style=3D"font-size:10.5pt;font-family:Arial,sans-serif=
+;background-color:rgb(255,255,255);font-weight:700;font-variant-numeric:nor=
+mal;font-variant-east-asian:normal;font-variant-alternates:normal;vertical-=
+align:baseline">Last date for data changes: </span><span style=3D"font-size=
+:10.5pt;font-family:Arial,sans-serif;background-color:rgb(255,255,0);font-w=
+eight:700;font-variant-numeric:normal;font-variant-east-asian:normal;font-v=
+ariant-alternates:normal;vertical-align:baseline">Feb 28, 2025 - 5:00 PM</s=
+pan><span style=3D"font-size:10.5pt;font-family:Arial,sans-serif;background=
+-color:rgb(255,255,255);font-weight:700;font-variant-numeric:normal;font-va=
+riant-east-asian:normal;font-variant-alternates:normal;vertical-align:basel=
+ine">:</span><span style=3D"font-size:10.5pt;font-family:Arial,sans-serif;b=
+ackground-color:rgb(255,255,255);font-variant-numeric:normal;font-variant-e=
+ast-asian:normal;font-variant-alternates:normal;vertical-align:baseline">=
+=C2=A0</span></p><p dir=3D"ltr" style=3D"line-height:1.9871999999999999;tex=
+t-align:justify;background-color:#f9f9f9;margin-top:0pt;margin-bottom:0pt">=
+<span style=3D"font-size:10.5pt;font-family:Arial,sans-serif;background-col=
+or:rgb(255,255,0);font-weight:700;font-variant-numeric:normal;font-variant-=
+east-asian:normal;font-variant-alternates:normal;vertical-align:baseline">W=
+e will charge an additional fee of Rs. 200 to make any changes related to n=
+ame, DOB, photo, signature, SC/ST and PWD certificates after the last date =
+of data changes.</span></p><p dir=3D"ltr" style=3D"line-height:1.9871999999=
+999999;text-align:justify;background-color:#f9f9f9;margin-top:0pt;margin-bo=
+ttom:0pt"><span style=3D"font-size:10.5pt;font-family:Arial,sans-serif;back=
+ground-color:rgb(255,255,255);font-variant-numeric:normal;font-variant-east=
+-asian:normal;font-variant-alternates:normal;vertical-align:baseline">The f=
+ollowing 6 fields can be changed (until the form closes) ONLY when there ar=
+e NO courses in the course cart. And you will be able to edit those fields =
+only if you: -=C2=A0</span></p><p dir=3D"ltr" style=3D"line-height:1.987199=
+9999999999;text-align:justify;background-color:#f9f9f9;margin-top:0pt;margi=
+n-bottom:0pt"><span style=3D"font-size:10.5pt;font-family:Arial,sans-serif;=
+background-color:rgb(255,255,255);font-variant-numeric:normal;font-variant-=
+east-asian:normal;font-variant-alternates:normal;vertical-align:baseline">R=
+EMOVE unpaid courses from the cart And/or - CANCEL paid courses=C2=A0</span=
+></p><p dir=3D"ltr" style=3D"line-height:1.9871999999999999;text-align:just=
+ify;background-color:#f9f9f9;margin-top:0pt;margin-bottom:0pt"><span style=
+=3D"font-size:10.5pt;font-family:Arial,sans-serif;background-color:rgb(255,=
+255,255);font-variant-numeric:normal;font-variant-east-asian:normal;font-va=
+riant-alternates:normal;vertical-align:baseline">1. Do you come under the S=
+C/ST category? *=C2=A0</span></p><p dir=3D"ltr" style=3D"line-height:1.9871=
+999999999999;text-align:justify;background-color:#f9f9f9;margin-top:0pt;mar=
+gin-bottom:0pt"><span style=3D"font-size:10.5pt;font-family:Arial,sans-seri=
+f;background-color:rgb(255,255,255);font-variant-numeric:normal;font-varian=
+t-east-asian:normal;font-variant-alternates:normal;vertical-align:baseline"=
+>2. SC/ST Proof=C2=A0</span></p><p dir=3D"ltr" style=3D"line-height:1.98719=
+99999999999;text-align:justify;background-color:#f9f9f9;margin-top:0pt;marg=
+in-bottom:0pt"><span style=3D"font-size:10.5pt;font-family:Arial,sans-serif=
+;background-color:rgb(255,255,255);font-variant-numeric:normal;font-variant=
+-east-asian:normal;font-variant-alternates:normal;vertical-align:baseline">=
+3. Are you a person with disabilities? *=C2=A0</span></p><p dir=3D"ltr" sty=
+le=3D"line-height:1.9871999999999999;text-align:justify;background-color:#f=
+9f9f9;margin-top:0pt;margin-bottom:0pt"><span style=3D"font-size:10.5pt;fon=
+t-family:Arial,sans-serif;background-color:rgb(255,255,255);font-variant-nu=
+meric:normal;font-variant-east-asian:normal;font-variant-alternates:normal;=
+vertical-align:baseline">4. Are you a person with disabilities above 40%?=
+=C2=A0</span></p><p dir=3D"ltr" style=3D"line-height:1.9871999999999999;tex=
+t-align:justify;background-color:#f9f9f9;margin-top:0pt;margin-bottom:0pt">=
+<span style=3D"font-size:10.5pt;font-family:Arial,sans-serif;background-col=
+or:rgb(255,255,255);font-variant-numeric:normal;font-variant-east-asian:nor=
+mal;font-variant-alternates:normal;vertical-align:baseline">5. Disabilities=
+ Proof=C2=A0</span></p><p dir=3D"ltr" style=3D"line-height:1.98719999999999=
+99;text-align:justify;background-color:#f9f9f9;margin-top:0pt;margin-bottom=
+:0pt"><span style=3D"font-size:10.5pt;font-family:Arial,sans-serif;backgrou=
+nd-color:rgb(255,255,255);font-variant-numeric:normal;font-variant-east-asi=
+an:normal;font-variant-alternates:normal;vertical-align:baseline">6. What i=
+s your role?=C2=A0</span></p><p dir=3D"ltr" style=3D"line-height:1.98719999=
+99999999;text-align:justify;background-color:#f9f9f9;margin-top:0pt;margin-=
+bottom:0pt"><span style=3D"font-size:11pt;font-family:Arial,sans-serif;colo=
+r:rgb(34,34,34);background-color:rgb(255,255,255);font-weight:700;font-vari=
+ant-numeric:normal;font-variant-east-asian:normal;font-variant-alternates:n=
+ormal;vertical-align:baseline">Note: </span><span style=3D"font-size:11pt;f=
+ont-family:Arial,sans-serif;color:rgb(34,34,34);background-color:rgb(255,25=
+5,255);font-variant-numeric:normal;font-variant-east-asian:normal;font-vari=
+ant-alternates:normal;vertical-align:baseline">Once you remove or cancel a =
+course, you will be able to edit these fields immediately.=C2=A0</span></p>=
+<p dir=3D"ltr" style=3D"line-height:1.9871999999999999;text-align:justify;b=
+ackground-color:#f9f9f9;margin-top:0pt;margin-bottom:0pt"><span style=3D"fo=
+nt-size:10.5pt;font-family:Arial,sans-serif;background-color:rgb(255,255,25=
+5);font-variant-numeric:normal;font-variant-east-asian:normal;font-variant-=
+alternates:normal;vertical-align:baseline">But, for cancelled courses, refu=
+nd of fees will be initiated only after 2 weeks.=C2=A0</span></p><p dir=3D"=
+ltr" style=3D"line-height:1.9871999999999999;text-align:justify;background-=
+color:#f9f9f9;margin-top:0pt;margin-bottom:0pt"><span style=3D"font-size:11=
+pt;font-family:Arial,sans-serif;color:rgb(34,34,34);background-color:rgb(25=
+5,255,255);font-variant-numeric:normal;font-variant-east-asian:normal;font-=
+variant-alternates:normal;vertical-align:baseline">15. </span><span style=
+=3D"font-size:11pt;font-family:Arial,sans-serif;color:rgb(34,34,34);backgro=
+und-color:rgb(255,255,255);font-weight:700;font-variant-numeric:normal;font=
+-variant-east-asian:normal;font-variant-alternates:normal;vertical-align:ba=
+seline">LAST DATE FOR CANCELLING EXAMS and getting a refund: </span><span s=
+tyle=3D"font-size:11pt;font-family:Arial,sans-serif;color:rgb(34,34,34);bac=
+kground-color:rgb(255,255,0);font-weight:700;font-variant-numeric:normal;fo=
+nt-variant-east-asian:normal;font-variant-alternates:normal;vertical-align:=
+baseline">Feb 28, 2025</span><span style=3D"font-size:10.5pt;font-family:Ar=
+ial,sans-serif;background-color:rgb(255,255,0);font-weight:700;font-variant=
+-numeric:normal;font-variant-east-asian:normal;font-variant-alternates:norm=
+al;vertical-align:baseline"> - 5:00 PM</span><span style=3D"font-size:11pt;=
+font-family:Arial,sans-serif;color:rgb(34,34,34);background-color:rgb(255,2=
+55,0);font-weight:700;font-variant-numeric:normal;font-variant-east-asian:n=
+ormal;font-variant-alternates:normal;vertical-align:baseline">=C2=A0</span>=
+</p><p dir=3D"ltr" style=3D"line-height:1.9871999999999999;text-align:justi=
+fy;background-color:#f9f9f9;margin-top:0pt;margin-bottom:0pt"><span style=
+=3D"font-size:11pt;font-family:Arial,sans-serif;color:rgb(34,34,34);backgro=
+und-color:rgb(255,255,255);font-variant-numeric:normal;font-variant-east-as=
+ian:normal;font-variant-alternates:normal;vertical-align:baseline">16. Clic=
+k here to view Timeline and Guideline : </span><a href=3D"https://u3447072.=
+ct.sendgrid.net/ls/click?upn=3Du001.KVe6xeK12Gy7P9NKD6c-2FfFnKbHR5Is-2F55gv=
+-2FxyB4Q4IuTbqUjuqlcDbL9CfgNWlS4mEox6Gx3hVIbYPJ7kUewjH12HvTtI6e94OmWPam1ztY=
+6jolIHWsEOFXrlGKVVK40ipHCF84b95Mb6mL7-2FVT-2BSQupkkhQVEHOvY1VZitGMLGRRibEmF=
+IzqMFk4nhPy0iCTpF_X1v5djjgedNKoB5UzQ5EnuTJx37-2F8RTKEKDFb6hYLL8uiYlhmfAc1ej=
+YW76jO8Igbe5tBAialzzM9YINMA9vBwoFHd4okX6cZaLDx19DLKJZw-2B0Ev1HQCM8J5v3kAkMy=
+bTBO-2Fid8NHVW4EWjoBVymw6y9zJXfsMA-2FdY1EKkM10Cq1Qxn65Z-2FCLlJTDL8MeOfPIIoF=
+4VsQdLzslIaDJX5fHjHwEWCNd792003zaC2y-2FE-3D" style=3D"text-decoration-line:=
+none" title=3D"" target=3D"_blank" rel=3D"noreferrer"><span style=3D"font-s=
+ize:11pt;font-family:Arial,sans-serif;color:rgb(17,85,204);background-color=
+:rgb(255,255,255);font-weight:700;font-variant-numeric:normal;font-variant-=
+east-asian:normal;font-variant-alternates:normal;vertical-align:baseline">G=
+uideline</span></a></p><p dir=3D"ltr" style=3D"line-height:1.98719999999999=
+99;text-align:justify;background-color:#f9f9f9;margin-top:0pt;margin-bottom=
+:0pt"><span style=3D"font-size:10.5pt;font-family:Arial,sans-serif;backgrou=
+nd-color:rgb(255,255,255);font-weight:700;font-variant-numeric:normal;font-=
+variant-east-asian:normal;font-variant-alternates:normal;vertical-align:bas=
+eline">Domain Certification</span></p><p dir=3D"ltr" style=3D"line-height:1=
+.9871999999999999;text-align:justify;background-color:#f9f9f9;margin-top:0p=
+t;margin-bottom:0pt"><span style=3D"font-size:10.5pt;font-family:Arial,sans=
+-serif;background-color:rgb(255,255,255);font-variant-numeric:normal;font-v=
+ariant-east-asian:normal;font-variant-alternates:normal;vertical-align:base=
+line">Domain Certification helps learners to gain expertise in a specific A=
+rea/Domain. This can be helpful for learners who wish to work in a particul=
+ar area as part of their job or research or for those appearing for some co=
+mpetitive exam or becoming job ready or specialising in an area of study.=
+=C2=A0=C2=A0</span></p><p dir=3D"ltr" style=3D"line-height:1.98719999999999=
+99;text-align:justify;background-color:#f9f9f9;margin-top:0pt;margin-bottom=
+:0pt"><span style=3D"font-size:10.5pt;font-family:Arial,sans-serif;backgrou=
+nd-color:rgb(255,255,255);font-variant-numeric:normal;font-variant-east-asi=
+an:normal;font-variant-alternates:normal;vertical-align:baseline">=C2=A0</s=
+pan></p><p dir=3D"ltr" style=3D"line-height:1.9871999999999999;text-align:j=
+ustify;background-color:#f9f9f9;margin-top:0pt;margin-bottom:0pt"><span sty=
+le=3D"font-size:11pt;font-family:Arial,sans-serif;color:rgb(34,34,34);backg=
+round-color:rgb(255,255,255);font-variant-numeric:normal;font-variant-east-=
+asian:normal;font-variant-alternates:normal;vertical-align:baseline">Every =
+domain will comprise Core courses and Elective courses. Once a learner comp=
+letes the requisite courses per the mentioned criteria, you will receive a =
+Domain Certificate showcasing your scores and the domain of expertise. Kind=
+ly refer to the following link for the list of courses available under each=
+ domain: </span><a href=3D"https://u3447072.ct.sendgrid.net/ls/click?upn=3D=
+u001.KVe6xeK12Gy7P9NKD6c-2FfANRFZaEssB51a-2BQnXhWX1qaO8Pcc8-2FK8y6XfVbXGe2v=
+n9h9_X1v5djjgedNKoB5UzQ5EnuTJx37-2F8RTKEKDFb6hYLL8uiYlhmfAc1ejYW76jO8Igbe5t=
+BAialzzM9YINMA9vB5T0cFVA4stHMfC0AzAlNbUzjKdDeOsaJxRpuACc5toIm6QxTU8OR-2F9P2=
+BmftludK9DXYCtyJJJEy5kytRzjWoUdsgzdaUi7PQnf-2Bbm3WO0M1gUT0aNJUA7sEg7GhKzZKH=
+iM-2BAELGTwDfGHKCCmlMZc-3D" style=3D"text-decoration-line:none" title=3D"" =
+target=3D"_blank" rel=3D"noreferrer"><span style=3D"font-size:10.5pt;font-f=
+amily:Arial,sans-serif;color:rgb(17,85,204);background-color:rgb(255,255,25=
+5);font-weight:700;font-variant-numeric:normal;font-variant-east-asian:norm=
+al;font-variant-alternates:normal;vertical-align:baseline">https://nptel.ac=
+.in/domains</span></a></p><p dir=3D"ltr" style=3D"line-height:1.656;text-al=
+ign:justify;background-color:#f9f9f9;margin-top:0pt;margin-bottom:0pt"><spa=
+n style=3D"font-size:10.5pt;font-family:Arial,sans-serif;background-color:r=
+gb(255,255,255);font-weight:700;font-variant-numeric:normal;font-variant-ea=
+st-asian:normal;font-variant-alternates:normal;vertical-align:baseline">Out=
+side India Candidates</span></p><p dir=3D"ltr" style=3D"line-height:1.656;t=
+ext-align:justify;background-color:#f9f9f9;margin-top:0pt;margin-bottom:0pt=
+"><span style=3D"font-size:10.5pt;font-family:Arial,sans-serif;background-c=
+olor:rgb(255,255,255);font-variant-numeric:normal;font-variant-east-asian:n=
+ormal;font-variant-alternates:normal;vertical-align:baseline">Candidates wh=
+o are residing outside India may also fill the exam form and pay the fees. =
+Mode of exam and other details will be communicated to you separately.</spa=
+n></p><p dir=3D"ltr" style=3D"line-height:1.9871999999999999;text-align:jus=
+tify;background-color:#f9f9f9;margin-top:0pt;margin-bottom:0pt"><span style=
+=3D"font-size:10.5pt;font-family:Arial,sans-serif;background-color:rgb(255,=
+255,255);font-variant-numeric:normal;font-variant-east-asian:normal;font-va=
+riant-alternates:normal;vertical-align:baseline">Thanks &amp; Regards,=C2=
+=A0</span></p><p dir=3D"ltr" style=3D"line-height:1.9871999999999999;text-a=
+lign:justify;background-color:#f9f9f9;margin-top:0pt;margin-bottom:0pt"><sp=
+an style=3D"font-size:11pt;font-family:Arial,sans-serif;color:rgb(34,34,34)=
+;background-color:rgb(255,255,255);font-variant-numeric:normal;font-variant=
+-east-asian:normal;font-variant-alternates:normal;vertical-align:baseline">=
+NPTEL TEAM</span></p><div><span style=3D"font-size:11pt;font-family:Arial,s=
+ans-serif;color:rgb(34,34,34);background-color:rgb(255,255,255);font-varian=
+t-numeric:normal;font-variant-east-asian:normal;font-variant-alternates:nor=
+mal;vertical-align:baseline"><br></span></div></span><img src=3D"https://u3=
+447072.ct.sendgrid.net/wf/open?upn=3Du001.FZAJ-2BOnMd0JMIxfxGjfge6rnqSlTFFA=
+bPHAiT2hF6-2FqZzZN90flRz0D-2BP67z7g5k0TH5ZLnbo-2FhfiJggYP3U21wSOB99USuJyzs9=
+aD2c6V3MZYqcl1OUCxYYNu8TVr0DA9FPv0LMDoKoL87yHmRLBcunmKz-2Fk8L8Rwnmpn-2BbVpl=
+j5pz5T9Dzd4MF8eHjtfbRf5-2BS93JDbopLQWUAj2PknKN1DZYRlczfqkubymk5mnuVLRmrw1iL=
+QDRvOLd5m-2Fpp" alt=3D"" width=3D"1" height=3D"1" border=3D"0" style=3D"hei=
+ght:1px!important;width:1px!important;border-width:0!important;margin-top:0=
+!important;margin-bottom:0!important;margin-right:0!important;margin-left:0=
+!important;padding-top:0!important;padding-bottom:0!important;padding-right=
+:0!important;padding-left:0!important">
+
+<p></p>
+
+-- <br>
+You received this message because you are subscribed to the Google Groups &=
+quot;Announcement list for Industrial Automation And Control&quot; group.<b=
+r>
+To unsubscribe from this group and stop receiving emails from it, send an e=
+mail to <a href=3D"mailto:noc24-ee56-announce+unsubscribe@nptel.iitm.ac.in"=
+ target=3D"_blank" rel=3D"noreferrer">noc24-ee56-announce+unsubscribe@nptel=
+.iitm.ac.in</a>.<br>
+To view this discussion visit <a href=3D"https://groups.google.com/a/nptel.=
+iitm.ac.in/d/msgid/noc24-ee56-announce/PIRnFAXQTtyZk67V2yNqVQ%40geopod-ismt=
+pd-1?utm_medium=3Demail&amp;utm_source=3Dfooter" target=3D"_blank" rel=3D"n=
+oreferrer">https://groups.google.com/a/nptel.iitm.ac.in/d/msgid/noc24-ee56-=
+announce/PIRnFAXQTtyZk67V2yNqVQ%40geopod-ismtpd-1</a>.<br>
+For more options, visit <a href=3D"https://groups.google.com/a/nptel.iitm.a=
+c.in/d/optout" target=3D"_blank" rel=3D"noreferrer">https://groups.google.c=
+om/a/nptel.iitm.ac.in/d/optout</a>.<br>
+</div>
+
+--000000000000622ccb062d99f944--
