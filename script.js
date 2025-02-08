@@ -28,21 +28,26 @@ document.addEventListener("DOMContentLoaded", function () {
     eventCanvas.style.width = "100%";
     eventCanvas.style.height = "300px"; // Adjust as needed
     eventCanvas.height = 300;
+    const getRandomData = () => [
+    Math.floor(Math.random() * 50) + 10,  // Random value between 10-60
+    Math.floor(Math.random() * 50) + 10,
+    Math.floor(Math.random() * 50) + 1
+    ];
 
     // Event Distribution Chart
     const eventData = {
-        labels: ["CRITICAL", "WARNINGS", "INFOS"],
-        datasets: [{
-            label: "Threat Events",
-            data: [25,20, 28],
-            backgroundColor: [
-                "#eb2222", 
-                "#ffcc00",  
-                "#3366ff" 
-            ],
-            hoverOffset: 12
-        }]
-    };
+    labels: ["CRITICAL", "WARNINGS", "INFOS"],
+    datasets: [{
+        label: "Threat Events",
+        data: getRandomData(),
+        backgroundColor: [
+            "#eb2222",  // Red for CRITICAL
+            "#ffcc00",  // Yellow for WARNINGS
+            "#3366ff"   // Blue for INFOS
+        ],
+        hoverOffset: 12
+    }]
+};
 
     new Chart(eventCtx, {
         type: "pie",
