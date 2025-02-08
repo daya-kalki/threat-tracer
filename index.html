@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Threat Tracer Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="logo">Threat Tracer</div>
+            <div class="logo"><img src="logo.jpg" alt="Company Logo"></div>
+            <nav>
+                <ul>
+                    <li class="active">Dashboard</li>
+                    <li>History</li>
+                    <li>Settings</li>
+                    <li>Logout</li>
+                </ul>
+            </nav>
+            <div class="alerts">
+                <div class="alert">⚠ 14 Alarm</div>
+                <div class="critical">✖️ 10 Critical</div>
+            </div>
+        </aside>
+
+        <main class="content">
+            <header>
+                <h2>Dashboard Overview</h2>
+                <div class="status-tabs">
+                    <span class="active">Status</span>
+                    <span>Details</span>
+                </div>
+            </header>
+
+            <section class="stats-grid">
+                <div class="stat-box red">
+                    <h3>10</h3>
+                    <p>CRITICAL</p>
+                </div>
+                <div class="stat-box yellow">
+                    <h3>24</h3>
+                    <p>WARNING</p>
+                </div>
+                <div class="stat-box blue">
+                    <h3>14</h3>
+                    <p>INFOS</p>
+                </div>
+                <div class="stat-box green">
+                    <h3>48</h3>
+                    <p>TOTAL</p>
+                </div>
+            </section>
+
+            <section class="charts">
+                <div class="chart">
+                    <h4>Event Distribution</h4>
+                    <canvas id="eventChart"></canvas>
+                </div>
+                <div class="chart" id="protectionHistory">
+                    <p id="latestThreat">No recent phishing threats detected.</p>
+                    <div id="severityContainer">
+                        <p id="severityDisplay"></p>
+
+                        <p id="severitymessage"></p>
+                    </div>
+                    
+
+                </div>
+                
+            
+            </section>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
